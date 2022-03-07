@@ -1,0 +1,38 @@
+{
+  "name": "happy",
+  "version": "1.0.0",
+  "description": "1. ## 简介",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.5"
+  },
+  "scripts": {
+    "test": "start"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShownBreak/happy.git"
+  },
+  "keywords": [
+    "happy"
+  ],
+  "author": "zhangfeiqing",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ShownBreak/happy/issues"
+  },
+  "homepage": "https://github.com/ShownBreak/happy#readme"
+}
