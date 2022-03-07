@@ -10,7 +10,7 @@
 
 2. ## 总体任务列表
 
-    - [ ] 实现一款拖拽生成css样式的`core-view.js`
+    - [1 ] 实现一款拖拽生成css样式的`core-view.js`
     - [ ] 实现一款拖拽预处理接口数据的`core-interface.js`
     - [ ] 用于`core-view.js` 与 `core-interface.js` 互联的 `connect.js`
     - [ ] 完善的文档和项目打包等工程化问题
