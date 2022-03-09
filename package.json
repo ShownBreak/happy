@@ -1,15 +1,24 @@
 {
   "name": "happy",
   "version": "1.0.0",
-  "description": "1. ## 简介",
+  "description": "低代码",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "clean-webpack-plugin": "^4.0.0",
+    "cross-env": "^7.0.3",
+    "html-webpack-plugin": "^5.5.0",
+    "moveable": "^0.27.3",
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
+  },
   "devDependencies": {
     "husky": "^7.0.4",
     "lint-staged": "^12.3.5"
   },
   "scripts": {
-    "test": "start"
+    "start": "cross-env NODE_ENV=development webpack-dev-server",
+    "build": "cross-env NODE_ENV=production webpack"
   },
   "husky": {
     "hooks": {
@@ -27,7 +36,7 @@
     "url": "git+https://github.com/ShownBreak/happy.git"
   },
   "keywords": [
-    "happy"
+    "happy.js"
   ],
   "author": "zhangfeiqing",
   "license": "MIT",
