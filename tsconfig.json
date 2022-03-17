@@ -1,0 +1,24 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "outDir": "./dist/",// 打包到的目录
+    "noImplicitAny": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "moduleResolution": "node",
+    "removeComments":true, // 删除注释 
+    "module": "esnext",
+    "target": "es5",// 转化成的目标语言
+    "baseUrl": "./",
+    "typeRoots": [
+      "./node_modules/@types"
+    ]
+  },
+  "include": [
+    "./src/**/*.ts"
+  ],// 要打包的文件
+  "exclude": [
+    "node_modules",
+    "*.test.ts"
+  ]
+}

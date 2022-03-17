@@ -1,28 +1,66 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin'); // 生成HTML 并插入指定js
-const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // 避免缓存
+const uglify = require('uglifyjs-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // 删除打包缓存
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   entry: {
-    'happy-core-view': path.resolve(__dirname, '../src/js/index.js')
+    'happy-core-view': path.resolve(__dirname, '../src/core/index.ts')
   },
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: 'happy-core-view.js'
+    filename: 'happy.js'
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, '../src')
+    },
+    extensions: ['.ts', '.js']
+  },
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: [
+          {
+            loader: 'tslint-loader',
+          },
+        ],
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.tsx?$/,
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              configFile: path.resolve(__dirname, '../tsconfig.json'),
+            },
+          },
+        ],
+        exclude: /node_modules/,
+      },
+    ],
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      filename: 'index.html',//生成的文件名
-      path: path.resolve(__dirname, "../dist"),
-      chunks: ['happy-core-view'],
-      template: path.resolve(__dirname, path.resolve(__dirname, '../src/page/index.html')),//指定打包压缩的文件
-      minify:{
-          removeComments:true,//清除注释
-          collapseWhitespace:true//清理空格
+    new CleanWebpackPlugin(),
+    new uglify({
+      uglifyOptions: {
+        compress: {
+          // 删除所有的 `console` 语句，可以兼容ie浏览器
+          drop_console: true,
+          // 内嵌定义了但是只用到一次的变量
+          collapse_vars: true,
+          // 提取出出现多次但是没有定义成变量去引用的静态值
+          reduce_vars: true,
+        },
+        output: {
+          // 最紧凑的输出
+          beautify: false,
+          // 删除所有的注释
+          comments: false,
+        }
       }
-    }),
-    
-    new CleanWebpackPlugin()
+    })
   ]
 };
