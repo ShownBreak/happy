@@ -10,9 +10,25 @@
  * 2.编译模块
  * 2.1 操作模块生成的配置文件编译为正常的html + css + js
  */
-function Happy() {
-  const a = 1;
-  const b = 287;
-  console.log(a + b);
+
+import initMixin from './init';
+import renderMixin from './render';
+import { IVnode } from '../interface/vnode';
+import { error } from '../utils/console';
+
+import { example } from '../utils/constance';
+
+
+function Happy(root: IVnode | undefined) {
+  if (!(this instanceof Happy)) {
+    return error('Happy is a constructor and should be called with the `new` keyword');
+  }
+  root = root || example;
+  this._init(root);
+  this.render(this.vdom);
 }
 
+initMixin(Happy);
+renderMixin(Happy);
+
+export { Happy };

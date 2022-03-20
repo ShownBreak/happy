@@ -8,13 +8,13 @@ module.exports = {
     'happy-core-view': path.resolve(__dirname, '../src/core/index.ts')
   },
   output: {
+		library: ["Happy"],
+		libraryTarget: "umd",
+    libraryExport: 'Happy',
     path: path.resolve(__dirname, '../dist'),
     filename: 'happy.js'
   },
   resolve: {
-    alias: {
-      '@': path.resolve(__dirname, '../src')
-    },
     extensions: ['.ts', '.js']
   },
   module: {

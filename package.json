@@ -9,7 +9,7 @@
     "clean-webpack-plugin": "^4.0.0",
     "cross-env": "^7.0.3",
     "eslint": "^8.11.0",
-    "moveable": "^0.27.3",
+    "moveable": "^0.28.0",
     "prettier": "^2.6.0",
     "ts-lint": "^4.5.1",
     "ts-loader": "^5.3.3",

@@ -8,13 +8,13 @@ module.exports = {
   },
   devtool: "source-map",
   output: {
+		library: "Happy",
+		libraryTarget: "umd",
+    libraryExport: 'Happy',
     path: path.resolve(__dirname, '../dist'),
-    filename: "happy.js"
+    filename: 'happy.js'
   },
   resolve: {
-    alias: {
-      '@': path.resolve(__dirname, '../src')
-    },
     extensions: [".ts", ".js"]
   },
   module: {
