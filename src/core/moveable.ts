@@ -3,8 +3,14 @@ import { IVnode } from '../interface/vnode';
 import { info } from '../utils/console';
 import { findVdomTargetbyId } from '../utils/index';
 
+const moveableMixin = (Happy) => {
+  Happy.prototype.moveableFactory = function(newV: string) {
+    deleteMoveableElem(this.currentMoveableElem);
+    this.currentMoveableElem = updateCurrentMoveableElement(newV, this.vdom);
+  };
+};
 
-const updateCurrentMoveableElement = (id: string, vdom: Array<IVnode>) => {
+const updateCurrentMoveableElement = (id: string, vdom: Array<IVnode>): Moveable => {
   info('updateCurrentMoveableElement');
   const currentVdom = findVdomTargetbyId(id, vdom);
   if (!currentVdom || currentVdom.parent ===  currentVdom.attr.id) return;
@@ -31,4 +37,13 @@ const updateCurrentMoveableElement = (id: string, vdom: Array<IVnode>) => {
   return moveable;
 };
 
-export default updateCurrentMoveableElement;
+const deleteMoveableElem = (dom: any) => {
+  if (dom) {
+    const styleId = dom.target.nextElementSibling.dataset.styledId;
+    const self = document.querySelector(`div[data-styled-id=${styleId}]`);
+    const parent = self.parentElement;
+    parent.removeChild(self);
+  }
+};
+
+export default moveableMixin;

@@ -13,22 +13,26 @@
 
 import initMixin from './init';
 import renderMixin from './render';
+import watcherMixin from './watcher';
+import moveableMixin from './moveable';
 import { IVnode } from '../interface/vnode';
 import { error } from '../utils/console';
 
 import { example } from '../utils/constance';
 
 
-function Happy(root: IVnode | undefined) {
+function Happy(root: IVnode = example) {
   if (!(this instanceof Happy)) {
     return error('Happy is a constructor and should be called with the `new` keyword');
   }
-  root = root || example;
   this._init(root);
   this.render(this.vdom);
+  this.watch('currentMoveableId', this.moveableFactory.bind(this));
 }
 
 initMixin(Happy);
 renderMixin(Happy);
+watcherMixin(Happy);
+moveableMixin(Happy);
 
 export { Happy };
