@@ -1,5 +1,4 @@
 import { IVnode } from '../interface/vnode';
-import { ICallbackFunction } from '../interface/function';
 
 /**
  * json格式的style转化为inline style
@@ -23,23 +22,6 @@ export const convertJsontoStyle = (attr: object, split: string): string => {
 export const humpConvert = (str: string): string => {
   if (!str) return '';
   return str.split(/(?=[A-Z])/g).join('-').toLowerCase();
-};
-
-export const watcher = (vm: object, key: string, val: string, cb: ICallbackFunction<string>) => {
-  Object.defineProperty(vm, key, {
-    enumerable: true,
-    configurable: false,
-    get(){
-      return val;
-    },
-    set(newVal){
-      const oldVal = val;
-      if(oldVal !== newVal){
-        val = newVal;
-        cb(newVal, oldVal);
-      }
-    }
-  });
 };
 
 export const findVdomTargetbyId = (id: string, vdom: Array<IVnode>): IVnode => {
